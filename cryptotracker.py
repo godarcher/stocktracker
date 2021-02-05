@@ -48,7 +48,7 @@ def notifier_below(crypto_kind, treshold):
     while True:
         time.sleep(17)
         crypto_price = price_finder(crypto_kind).split(": ")[-1]
-        if crypto_price >= treshold:
+        if crypto_price <= treshold:
             winsound.Beep(frequency=2700, duration=10000)
             notify.show_toast(f"{crypto_kind} is above set treshold!",
                 f"Current price of {crypto_kind} is {crypto_price}", duration=60)
@@ -59,5 +59,5 @@ def notifier_below(crypto_kind, treshold):
 #MAIN CODE#
 ###########
 print(price_finder("bitcoin"))
-notifier("bitcoin", "32000")
-
+notifier_above("bitcoin", "32000")
+notifier_below("bitcoin", "10000")
