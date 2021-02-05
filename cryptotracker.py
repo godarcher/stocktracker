@@ -20,4 +20,10 @@ def price_finder(crypto_kind):
     #we fetch in html
     HTML = requests.get(gurl)
 
+    #we use bs4 to parse the HTML content
+    soup = BeautifulSoup(HTML.text, "html.parser")
+
+    price = soup.find("div", attrs={"class": "BNeawe iBp4i AP7Wnd"}).find("div",
+                             attrs={'class':'BNeawe iBp4i AP7Wnd'}).text.split(" ")
     
+    return str(f"{crypto_kind}: {price[0]}")
