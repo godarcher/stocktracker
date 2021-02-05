@@ -13,6 +13,7 @@ from win10toast import ToastNotifier
 #FUNCTIONS#
 ###########
 
+#this functions finds a price of a given crypto currency by parsing a google search
 def price_finder(crypto_kind):
     #we create a google query url with the crypto input
     gurl =  "https://www.google.com/search?q=" + crypto_kind + "+price"
@@ -27,3 +28,12 @@ def price_finder(crypto_kind):
                              attrs={'class':'BNeawe iBp4i AP7Wnd'}).text.split(" ")
     
     return str(f"{crypto_kind}: {price[0]}")
+
+#this function notifies the user if a certain crypto_kind goes above or below a specific treshold
+def notifier(crypto_kind, treshold):
+    notify = ToastNotifier()
+    while True:
+        time.sleep(17)
+        crypto_price = price_finder(crypto_kind).split(": ")[-1]
+        if crypto_price >= treshold:
+            winsound.Beep(frequency=2700, duration=10000)
